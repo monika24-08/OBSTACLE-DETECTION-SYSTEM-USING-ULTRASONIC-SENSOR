@@ -19,8 +19,10 @@ Tinkercad provides a simulation environment where this circuit can be virtually 
 
 
 ## Circuit Diagram:
+<img width="905" height="703" alt="image" src="https://github.com/user-attachments/assets/bb07c9ee-dd1a-4469-9964-3effc3d1e72e" />
+
  
-## Procedure: //Modify the procedure based on your circuit
+## Procedure:
 
 Step 1: Set Up the Tinkercad Environment
 1.	Log in to Tinkercad: Open Tinkercad in your web browser and log into your account.
@@ -53,11 +55,44 @@ Step 7: Save Your Work
 
 
 ## Code:
+```
+#define echoPin 2   // Echo pin connected to Arduino pin 2
+#define trigPin 3   // Trigger pin connected to Arduino pin 3
 
+long duration;   // Declare only once
+int distance;    // Declare only once
 
+void setup() {
+  pinMode(trigPin, OUTPUT);  // Set trigPin as output
+  pinMode(echoPin, INPUT);   // Set echoPin as input
+  Serial.begin(9600);        // Start serial communication
+}
+
+void loop() {
+  // Clear the trigPin condition
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+
+  // Set the trigPin HIGH (ACTIVE) for 10 microseconds
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+
+  // Reads the echoPin, returns the sound wave travel time in microseconds
+  duration = pulseIn(echoPin, HIGH);
+
+  // Calculating the distance
+  distance = duration * 0.034 / 2; // Speed of sound 0.034 cm/µs (divided by 2 for go and return)
+
+  // Displays the distance on the Serial Monitor
+  Serial.print("Distance: ");
+  Serial.print(distance);
+  Serial.println(" cm");
+}
+```
 ## Output:
- 
 
+https://github.com/user-attachments/assets/f4e50ccb-8305-432e-8cd7-3e54452adb0a
 
 ## Result
 
